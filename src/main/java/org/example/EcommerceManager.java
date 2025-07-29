@@ -5,11 +5,14 @@ import java.util.*;
 
 public class EcommerceManager {
 
+    // Too many fields
     private Map<String, String> users = new HashMap<>();
     private Map<String, String> emails = new HashMap<>();
     private List<Product> products = new ArrayList<>();
     private List<Order> orders = new ArrayList<>();
     private List<String> logs = new ArrayList<>();
+    private int a1, a2, a3, a4, a5, a6, a7, a8, a9, a10;
+    private int b1, b2, b3, b4, b5, b6, b7, b8, b9, b10;
 
     public void registerUser(String username, String password, String email) {
         users.put(username, password);
@@ -44,21 +47,35 @@ public class EcommerceManager {
         sendConfirmationEmail(username, order);
     }
 
+    public void processPayment(String username, double amount, String cardNumber) {
+        if (!users.containsKey(username)) {
+            log("Payment attempt by unknown user: " + username);
+            return;
+        }
+        System.out.println("Processing payment...");
+        if (amount > 1000) {
+            if (cardNumber.startsWith("4")) {
+                if (cardNumber.endsWith("1")) {
+                    try {
+                        if (amount % 2 == 0) {
+                            log("Payment passed all nested checks.");
+                        }
+                    } catch (Exception e) {
+                        log("Payment check failed");
+                    }
+                }
+            }
+        }
+        System.out.println("Payment of €" + amount + " processed for " + username);
+        log("Payment successful: " + amount + "€ for " + username);
+    }
+
     private void sendConfirmationEmail(String username, Order order) {
         String email = emails.get(username);
         if (email != null) {
             System.out.println("Sending confirmation email to " + email + " for order " + order.getId());
             log("Confirmation email sent to " + email);
         }
-    }
-
-    public void processPayment(String username, double amount, String cardNumber) {
-        if (!users.containsKey(username)) {
-            log("Payment attempt by unknown user: " + username);
-            return;
-        }
-        System.out.println("Payment of €" + amount + " processed for " + username);
-        log("Payment successful: " + amount + "€ for " + username);
     }
 
     public void printStats() {
@@ -75,19 +92,38 @@ public class EcommerceManager {
         logs.forEach(System.out::println);
     }
 
-    public static void main(String[] args) {
-        EcommerceManager app = new EcommerceManager();
-        app.registerUser("alice", "1234", "alice@example.com");
+    // Add filler methods to exceed threshold
+    public void method1() {}
+    public void method2() {}
+    public void method3() {}
+    public void method4() {}
+    public void method5() {}
+    public void method6() {}
+    public void method7() {}
+    public void method8() {}
+    public void method9() {}
+    public void method10() {}
+    public void method11() {}
+    public void method12() {}
 
-        app.addProduct(new Product("P001", "Laptop", 1200.00));
-        app.addProduct(new Product("P002", "Mouse", 25.99));
-
-        app.login("alice", "1234");
-
-        app.createOrder("alice", Arrays.asList("P001", "P002"));
-        app.processPayment("alice", 1225.99, "4111111111111111");
-
-        app.printStats();
-        app.showLogs();
+    public void deeplyNestedLogic() {
+        for (int i = 0; i < 10; i++) {
+            if (i % 2 == 0) {
+                while (i < 10) {
+                    try {
+                        if (i > 5) {
+                            for (int j = 0; j < 3; j++) {
+                                if ((j + i) % 2 == 0) {
+                                    System.out.println("Nested " + i + ", " + j);
+                                }
+                            }
+                        }
+                        i++;
+                    } catch (Exception e) {
+                        log("Error in deep logic");
+                    }
+                }
+            }
+        }
     }
 }
